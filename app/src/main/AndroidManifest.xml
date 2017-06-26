@@ -65,6 +65,10 @@
                 <data android:mimeType="application/xhtml+xml" />
                 <data android:mimeType="application/vnd.wap.xhtml+xml" />
             </intent-filter>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
         </activity>
 
         <activity
@@ -96,6 +100,10 @@
             android:name=".history.HistoryProvider"
             android:authorities="org.lineageos.jelly.history"
             android:exported="false" />
+
+        <meta-data
+            android:name="android.webkit.WebView.EnableSafeBrowsing"
+            android:value="true" />
 
     </application>
 </manifest>

@@ -106,6 +106,12 @@
     <string name="pref_cookie_clear">Clear cookies</string>
     <!-- Settings: clear cookie toast confirmation -->
     <string name="pref_cookie_clear_done">Cleared all the cookies</string>
+    <!-- Settings: do not track preference title -->
+    <string name="pref_do_not_track_title">Do Not Track</string>
+    <!-- Settings: do not track preference summary -->
+    <string name="pref_do_not_track_summary">Send a Do Not Track request to websites you visit</string>
+    <!-- Settings: save form data title -->
+    <string name="pref_save_form_data_title">Save form data</string>
 
     <!-- History: title -->
     <string name="history_title">History</string>
@@ -157,4 +163,7 @@
     <string name="auth_dialog_detail">%1$s requires a username and password.</string>
     <!-- Auth dialog: login button -->
     <string name="auth_dialog_login">Log in</string>
+
+    <!-- Launcher shortcut: new incognito tab -->
+    <string name="shortcut_new_incognito_tab">New incognito tab</string>
 </resources>
