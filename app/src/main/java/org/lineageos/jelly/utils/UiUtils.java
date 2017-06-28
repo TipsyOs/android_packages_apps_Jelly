@@ -28,6 +28,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.ColorUtils;
 import android.support.v7.graphics.Palette;
 import android.util.TypedValue;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import org.lineageos.jelly.R;
 
@@ -85,4 +87,27 @@ public final class UiUtils {
     public static float dpToPx(Resources res, float dp) {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, res.getDisplayMetrics());
     }
+
+    /**
+     * Shows the software keyboard.
+     *
+     * @param view The currently focused {@link View}, which would receive soft keyboard input.
+     */
+    public static void showKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(
+                Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInputFromWindow(view.getWindowToken(), 0, 0);
+    }
+
+    /**
+     * Hides the keyboard.
+     *
+     * @param view The {@link View} that is currently accepting input.
+     */
+    public static void hideKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(
+                Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
 }
