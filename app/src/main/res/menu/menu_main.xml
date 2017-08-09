@@ -41,11 +41,6 @@
         android:title="@string/menu_share"
         app:showAsAction="never" />
     <item
-        android:id="@+id/menu_search"
-        android:icon="@drawable/ic_search"
-        android:title="@string/menu_search"
-        app:showAsAction="never" />
-    <item
         android:id="@+id/menu_favorite"
         android:icon="@drawable/ic_favorite"
         android:title="@string/menu_favorites"

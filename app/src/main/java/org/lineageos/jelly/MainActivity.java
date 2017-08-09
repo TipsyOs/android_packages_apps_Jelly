@@ -54,7 +54,6 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.webkit.CookieManager;
 import android.webkit.URLUtil;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -65,7 +64,6 @@ import org.lineageos.jelly.favorite.FavoriteActivity;
 import org.lineageos.jelly.favorite.FavoriteDatabaseHandler;
 import org.lineageos.jelly.history.HistoryActivity;
 import org.lineageos.jelly.ui.EditTextExt;
-import org.lineageos.jelly.ui.SearchBarController;
 import org.lineageos.jelly.utils.PrefsUtils;
 import org.lineageos.jelly.utils.UiUtils;
 import org.lineageos.jelly.webview.WebViewExt;
@@ -76,7 +74,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class MainActivity extends WebViewExtActivity implements View.OnTouchListener,
-        View.OnScrollChangeListener, SearchBarController.OnCancelListener {
+        View.OnScrollChangeListener {
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final String PROVIDER = "org.lineageos.jelly.fileprovider";
     private static final String EXTRA_INCOGNITO = "extra_incognito";
@@ -87,7 +85,6 @@ public class MainActivity extends WebViewExtActivity implements View.OnTouchList
 
     private CoordinatorLayout mCoordinator;
     private WebViewExt mWebView;
-    private SearchBarController mSearchController;
 
     private String mWaitingDownloadUrl;
 
@@ -172,14 +169,6 @@ public class MainActivity extends WebViewExtActivity implements View.OnTouchList
                 });
         mWebView.setOnTouchListener(this);
         mWebView.setOnScrollChangeListener(this);
-        mSearchController = new SearchBarController(mWebView,
-                (EditText) findViewById(R.id.search_menu_edit),
-                (TextView) findViewById(R.id.search_status),
-                (ImageButton) findViewById(R.id.search_menu_prev),
-                (ImageButton) findViewById(R.id.search_menu_next),
-                (ImageButton) findViewById(R.id.search_menu_cancel),
-                this);
-
     }
 
     @Override
@@ -210,7 +199,6 @@ public class MainActivity extends WebViewExtActivity implements View.OnTouchList
 
     @Override
     public void onBackPressed() {
-        mSearchController.onCancel();
         if (mWebView.canGoBack()) {
             mWebView.goBack();
         } else {
@@ -298,10 +286,6 @@ public class MainActivity extends WebViewExtActivity implements View.OnTouchList
                         // Delay a bit to allow popup menu hide animation to play
                         new Handler().postDelayed(() -> shareUrl(mWebView.getUrl()), 300);
                         break;
-                    case R.id.menu_search:
-                        // Run the search setup
-                        showSearch();
-                        break;
                     case R.id.menu_favorite:
                         startActivity(new Intent(this, FavoriteActivity.class));
                         break;
@@ -334,18 +318,6 @@ public class MainActivity extends WebViewExtActivity implements View.OnTouchList
             //noinspection RestrictedApi
             helper.show();
         });
-    }
-
-    private void showSearch() {
-        findViewById(R.id.toolbar_search_bar).setVisibility(View.GONE);
-        findViewById(R.id.toolbar_search_page).setVisibility(View.VISIBLE);
-        mSearchController.onShow();
-    }
-
-    @Override
-    public void onCancelSearch() {
-        findViewById(R.id.toolbar_search_page).setVisibility(View.GONE);
-        findViewById(R.id.toolbar_search_bar).setVisibility(View.VISIBLE);
     }
 
     private void openInNewTab(String url) {
